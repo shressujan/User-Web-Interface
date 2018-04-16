@@ -1,0 +1,63 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>edu.unk.salase3</groupId>
+  <artifactId>homework</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>homework</name>
+
+  <organization>
+		<name>UNK Computer Science and Information Technology Department</name>
+		<url>http://www.unk.edu/academics/csit/index.php</url>
+  </organization>
+
+  	<developers>
+		<developer>
+			<id>salase3</id>
+			<name>Eduardo Salas</name>
+			<email>salase3@lopers.unk.edu</email>
+		</developer>
+		<developer>
+			<id>shresthas8</id>
+			<name>Sujan Shrestha</name>
+			<email>shresthas8@lopers.unk.edu</email>
+		</developer>
+	</developers>
+	
+  <properties>
+  	<java.version>1.9</java.version>
+  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  	<maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+  </properties>
+
+  <parent>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-parent</artifactId>
+	<version>1.5.9.RELEASE</version>
+  </parent>
+  
+  <dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+	    	<artifactId>spring-boot-starter-test</artifactId>
+	    	<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+	    	<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+	    	<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>
+	</dependencies>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+</project>
