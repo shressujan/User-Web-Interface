@@ -1,6 +1,5 @@
 package edu.unk.cs406.user.group.repository;
 
-import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -20,7 +19,7 @@ public class GroupRepositoryImpl implements GroupRepositoryCustom {
                 
         WriteResult result = mongoTemplate.updateFirst(query, update, GroupEntity.class);
 		
-        if(entity!=null) {
+        if(result!=null) {
         	return entity;
         } else {
         	return null;
