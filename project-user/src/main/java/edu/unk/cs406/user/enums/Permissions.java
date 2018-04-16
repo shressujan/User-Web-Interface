@@ -1,4 +1,4 @@
-package edu.unk.cs406.user.profile;
+package edu.unk.cs406.user.enums;
 
 public enum Permissions {
 	ADMIN,

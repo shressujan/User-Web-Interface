@@ -1,6 +1,7 @@
-package edu.unk.cs406.user.group;
+package edu.unk.cs406.user.group.entity;
 
-import edu.unk.cs406.user.User;
+import edu.unk.cs406.user.entity.User;
+import edu.unk.cs406.user.enums.Permissions;
 
 public class Group implements User {
 
@@ -57,6 +58,16 @@ public class Group implements User {
 	public void setContent() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public Permissions getPermissions() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean setPermissions() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 

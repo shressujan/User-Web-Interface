@@ -1,6 +1,7 @@
 package edu.unk.cs406.user.profile;
 
-import edu.unk.cs406.user.User;
+import edu.unk.cs406.user.entity.User;
+import edu.unk.cs406.user.enums.Permissions;
 
 public class Profile implements User {
 
@@ -47,6 +48,16 @@ public class Profile implements User {
 	public void setContent() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public Permissions getPermissions() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean setPermissions() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
