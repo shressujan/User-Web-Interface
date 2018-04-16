@@ -1,6 +1,6 @@
 package edu.unk.cs406.user.entity;
 
-import edu.unk.cs406.user.enums.Permissions;
+import edu.unk.cs406.user.profile.Profile;
 
 public interface User {
 	public String getId();
@@ -8,18 +8,14 @@ public interface User {
 	public void setLabel();
 	public String getDescription();
 	public void setDescription();
-	
-	public Permissions getPermissions();
-	public boolean setPermissions();
 	public int getLikes();
-	public void addLike(User user);
-	
-	//TODO: List of Comment getter
-	
-	//TODO: List of locations getter
-	
-	//TODO: List of Events getter
-	
+	public void addLike(Profile user);
+		//TODO: List of Comment getter
+	//public List<> getComments();
+		//TODO: List of locations getter
+	//public List<> getLocations();
+		//TODO: List of Events getter
+	//public List<> getEvents();
 	public byte[] getContent();
 	public void setContent();
 }

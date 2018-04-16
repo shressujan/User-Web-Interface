@@ -1,10 +1,17 @@
 package edu.unk.cs406.user.profile;
 
+import java.util.Collection;
+
 import edu.unk.cs406.user.entity.User;
-import edu.unk.cs406.user.enums.Permissions;
 
 public class Profile implements User {
-
+	
+	private String id;
+	private String label;
+	private String description;
+	private Collection<Profile> likes;
+	private String Content;
+	
 	public String getId() {
 		// TODO Auto-generated method stub
 		return null;
@@ -35,7 +42,7 @@ public class Profile implements User {
 		return 0;
 	}
 
-	public void addLike(User user) {
+	public void addLike(Profile user) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -49,15 +56,5 @@ public class Profile implements User {
 		// TODO Auto-generated method stub
 		
 	}
-
-	public Permissions getPermissions() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean setPermissions() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 }
