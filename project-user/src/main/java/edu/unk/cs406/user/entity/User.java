@@ -1,6 +1,8 @@
 package edu.unk.cs406.user.entity;
 
-import edu.unk.cs406.user.profile.Profile;
+import java.util.Date;
+
+import edu.unk.cs406.user.profile.entity.ProfileEntity;
 
 public interface User {
 	public String getId();
@@ -8,8 +10,10 @@ public interface User {
 	public void setLabel();
 	public String getDescription();
 	public void setDescription();
+	public Date getCreatedDate();
+	public Date getLastModifiedDate();
 	public int getLikes();
-	public void addLike(Profile user);
+	public void addLike(ProfileEntity user);
 		//TODO: List of Comment getter
 	//public List<> getComments();
 		//TODO: List of locations getter
