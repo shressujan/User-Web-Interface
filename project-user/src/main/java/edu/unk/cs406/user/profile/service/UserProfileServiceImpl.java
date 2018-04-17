@@ -1,0 +1,112 @@
+package edu.unk.cs406.user.profile.service;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import edu.unk.cs406.user.profile.dto.CreateUserProfileDTO;
+import edu.unk.cs406.user.profile.dto.UpdateUserProfileDTO;
+import edu.unk.cs406.user.entity.User;
+import edu.unk.cs406.user.profile.entity.ProfileEntity;
+import edu.unk.cs406.user.repository.UserRepository;
+
+public class UserProfileServiceImpl implements UserProfileService {
+
+	@Autowired
+	private final UserRepository userRepo;
+	private CreateUserProfileDTO CDTO;
+	private UpdateUserProfileDTO UDTO;
+	private final Validator validation;
+	
+	public UserProfileServiceImpl (UserRepository u, Validator v)
+	{
+		this.userRepo =  Objects.requireNonNull(u);
+		this.validation = Objects.requireNonNull(v);
+	}
+
+	
+	public User CreateUserProfile(CreateUserProfileDTO dto) {
+		// TODO Auto-generated method stub
+		
+		this.CDTO = Objects.requireNonNull(dto);
+		Set<ConstraintViolation<CreateUserProfileDTO>> violations = this.validation.validate(dto, null);
+		if(violations.isEmpty())
+		{
+			ProfileEntity UPE = new ProfileEntity();
+			UPE.setLabel(this.CDTO.getLabel());
+			UPE.addDescription(this.CDTO.getDescription());
+//			UPE.addSubscriptions(this.DTO.getSubscriptions());
+//			UPE.addContent(this.DTO.getContent());
+			
+			
+			return this.userRepo.save(UPE);
+		
+		}
+		else
+		{
+			return null;
+		}
+	
+	}
+
+	@Override
+	public Optional<ProfileEntity> GetUserProfile(String profileID) {
+		// TODO Auto-generated method stub
+		Optional<ProfileEntity> UPE = Objects.requireNonNull(this.userRepo.findById(profileID));
+		
+		return UPE;
+	}
+
+	@Override
+	public User FindUserProfileByLabel(String label) {
+		// TODO Auto-generated method stub
+		ProfileEntity UPE =  Objects.requireNonNull(this.userRepo.findByLabel(label));
+		
+		return UPE;
+	}
+
+	@Override
+	public List<ProfileEntity> FindAllUserProfiles() {
+		// TODO Auto-generated method stub
+		return this.userRepo.findAll();
+	}
+
+	@Override
+	public User UpdateUserProfile(UpdateUserProfileDTO dto) {
+		// TODO Auto-generated method stub
+		this.UDTO =Objects.requireNonNull(dto);
+		Set<ConstraintViolation<UpdateUserProfileDTO>> violations = this.validation.validate(dto, null);
+		if(violations.isEmpty())
+		{
+			Optional<ProfileEntity> UPE = this.userRepo.findById(dto.getId());
+			UPE.get().setLabel(dto.getLabel());
+			UPE.get().addDescription(dto.getDescription());
+			
+			return this.userRepo.save(UPE.get());
+		}
+
+		return null;
+	}
+
+	@Override
+	public User DeleteUserProfile(String profileID) {
+		// TODO Auto-generated method stub
+		Optional<ProfileEntity> UPE = Objects.requireNonNull(this.userRepo.findById(profileID));
+		if(UPE.isPresent())
+		{
+			this.userRepo.deleteById(UPE.get().getId());
+			return UPE.get();
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+}
