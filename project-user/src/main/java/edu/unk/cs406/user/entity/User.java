@@ -7,9 +7,9 @@ import edu.unk.cs406.user.profile.entity.ProfileEntity;
 public interface User {
 	public String getId();
 	public String getLabel();
-	public void setLabel();
+	public void setLabel(String str);
 	public String getDescription();
-	public void setDescription();
+	public void setDescription(String str);
 	public Date getCreatedDate();
 	public Date getLastModifiedDate();
 	public int getLikes();

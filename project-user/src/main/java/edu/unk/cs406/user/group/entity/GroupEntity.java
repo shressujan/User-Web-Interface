@@ -9,10 +9,10 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import edu.unk.cs406.user.entity.User;
+import edu.unk.cs406.user.entity.UserEntity;
 import edu.unk.cs406.user.profile.entity.ProfileEntity;
 
-public class GroupEntity implements User {
+public class GroupEntity extends UserEntity {
 
 	@Id
 	@NotNull
@@ -39,59 +39,6 @@ public class GroupEntity implements User {
 	
 	byte[] content;
 
-	public String getId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String getLabel() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void setLabel() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void setDescription() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public Date getCreatedDate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Date getLastModifiedDate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public int getLikes() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public void addLike(ProfileEntity user) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public byte[] getContent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void setContent() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }

@@ -2,7 +2,6 @@ package edu.unk.cs406.user.profile.service;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -13,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import edu.unk.cs406.user.profile.dto.CreateUserProfileDTO;
 import edu.unk.cs406.user.profile.dto.UpdateUserProfileDTO;
 import edu.unk.cs406.user.entity.User;
+import edu.unk.cs406.user.entity.UserEntity;
 import edu.unk.cs406.user.profile.entity.ProfileEntity;
 import edu.unk.cs406.user.repository.UserRepository;
 
@@ -56,9 +56,9 @@ public class UserProfileServiceImpl implements UserProfileService {
 	}
 
 	@Override
-	public Optional<ProfileEntity> GetUserProfile(String profileID) {
+	public UserEntity GetUserProfile(String profileID) {
 		// TODO Auto-generated method stub
-		Optional<ProfileEntity> UPE = Objects.requireNonNull(this.userRepo.findById(profileID));
+		UserEntity UPE = Objects.requireNonNull(userRepo.findOne(profileID));
 		
 		return UPE;
 	}
@@ -66,13 +66,13 @@ public class UserProfileServiceImpl implements UserProfileService {
 	@Override
 	public User FindUserProfileByLabel(String label) {
 		// TODO Auto-generated method stub
-		ProfileEntity UPE =  Objects.requireNonNull(this.userRepo.findByLabel(label));
+		UserEntity UPE =  Objects.requireNonNull(this.userRepo.findByLabel(label));
 		
 		return UPE;
 	}
 
 	@Override
-	public List<ProfileEntity> FindAllUserProfiles() {
+	public List<UserEntity> FindAllUserProfiles() {
 		// TODO Auto-generated method stub
 		return this.userRepo.findAll();
 	}
@@ -84,11 +84,11 @@ public class UserProfileServiceImpl implements UserProfileService {
 		Set<ConstraintViolation<UpdateUserProfileDTO>> violations = this.validation.validate(dto, null);
 		if(violations.isEmpty())
 		{
-			Optional<ProfileEntity> UPE = this.userRepo.findById(dto.getId());
-			UPE.get().setLabel(dto.getLabel());
-			UPE.get().addDescription(dto.getDescription());
+			UserEntity UPE = this.userRepo.findOne(dto.getId());
+			UPE.setLabel(dto.getLabel());
+			UPE.setDescription(dto.getDescription());
 			
-			return this.userRepo.save(UPE.get());
+			return this.userRepo.save(UPE);
 		}
 
 		return null;
@@ -97,11 +97,11 @@ public class UserProfileServiceImpl implements UserProfileService {
 	@Override
 	public User DeleteUserProfile(String profileID) {
 		// TODO Auto-generated method stub
-		Optional<ProfileEntity> UPE = Objects.requireNonNull(this.userRepo.findById(profileID));
-		if(UPE.isPresent())
+		UserEntity UPE = Objects.requireNonNull(this.userRepo.findOne(profileID));
+		if(UPE != null)
 		{
-			this.userRepo.deleteById(UPE.get().getId());
-			return UPE.get();
+			this.userRepo.delete(UPE.getId());
+			return UPE;
 		}
 		else
 		{
