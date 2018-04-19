@@ -1,5 +1,6 @@
 package edu.unk.cs406.user.entity;
 
+import java.util.Collection;
 import java.util.Date;
 
 import edu.unk.cs406.user.profile.entity.ProfileEntity;
@@ -14,12 +15,14 @@ public interface User {
 	public Date getLastModifiedDate();
 	public int getLikes();
 	public void addLike(ProfileEntity user);
-		//TODO: List of Comment getter
-	//public List<> getComments();
-		//TODO: List of locations getter
-	//public List<> getLocations();
-		//TODO: List of Events getter
-	//public List<> getEvents();
+	public void deleteLike(ProfileEntity user);
+	public Collection<String> getComments();
+	public void addComment(ProfileEntity user, String comment);
+	public void deleteComment(String commentId);
+	public Collection<String> getLocations();
+	public void addLocation();
+	public void deleteLocation(String locationId);
+	public Collection<String> getEvents();
 	public byte[] getContent();
-	public void setContent();
+	public void setContent(byte[] content);
 }

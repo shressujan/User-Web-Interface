@@ -40,7 +40,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 		{
 			ProfileEntity UPE = new ProfileEntity();
 			UPE.setLabel(this.CDTO.getLabel());
-			UPE.addDescription(this.CDTO.getDescription());
+			UPE.setDescription(this.CDTO.getDescription());
 //			UPE.addSubscriptions(this.DTO.getSubscriptions());
 //			UPE.addContent(this.DTO.getContent());
 			
