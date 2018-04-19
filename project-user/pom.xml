@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>edu.unk.salase3</groupId>
+  <groupId>edu.unk.cs406.user</groupId>
   <artifactId>project-user</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>homework</name>
+  <version>1.0.0</version>
+  <name>project-user</name>
 
   <organization>
 		<name>UNK Computer Science and Information Technology Department</name>
@@ -87,12 +87,12 @@
         </dependency>
   </dependencies>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </build>
+<!--   <build> -->
+<!--     <plugins> -->
+<!--       <plugin> -->
+<!--         <groupId>org.springframework.boot</groupId> -->
+<!--         <artifactId>spring-boot-maven-plugin</artifactId> -->
+<!--       </plugin> -->
+<!--     </plugins> -->
+<!--   </build> -->
 </project>
