@@ -7,45 +7,45 @@ import edu.unk.cs406.user.profile.entity.ProfileEntity;
 
 public class GroupEntity extends UserEntity {
 	
-	Collection<ProfileEntity> admins;
+	Collection<String> admins;
 	
-	Collection<ProfileEntity> moderators;
+	Collection<String> moderators;
 	
-	Collection<ProfileEntity> members;
+	Collection<String> members;
 	
-	public Collection<ProfileEntity> getAdmins() {
+	public Collection<String> getAdmins() {
 		return admins;
 	}
 	
 	public boolean isAdmin(ProfileEntity user) {
-		return admins.contains(user);
+		return admins.contains(user.getId());
 	}
 	
 	public void addAdmin(ProfileEntity user) {
-		admins.add(user);
+		admins.add(user.getId());
 	}
 	
-	public Collection<ProfileEntity> getModerators() {
+	public Collection<String> getModerators() {
 		return moderators;
 	}
 	
 	public boolean isModerator(ProfileEntity user) {
-		return moderators.contains(user);
+		return moderators.contains(user.getId());
 	}
 	
 	public void addModerator(ProfileEntity user) {
-		moderators.add(user);
+		moderators.add(user.getId());
 	}
 	
-	public Collection<ProfileEntity> getMembers() {
+	public Collection<String> getMembers() {
 		return members;
 	}
 	
 	public boolean isMember(ProfileEntity user) {
-		return members.contains(user);
+		return members.contains(user.getId());
 	}
 	
 	public void addMember(ProfileEntity user) {
-		members.add(user);
+		members.add(user.getId());
 	}
 }

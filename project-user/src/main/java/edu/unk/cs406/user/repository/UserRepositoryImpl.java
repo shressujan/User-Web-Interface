@@ -36,18 +36,22 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
 			ProfileEntity profileUser = (ProfileEntity) user;
 			update.set("subscriptions", profileUser.getSubscriptions());
 			result = mongoTemplate.updateFirst(query, update, ProfileEntity.class);
+			if(result == null) {
+				return null;
+			}
+			return (ProfileEntity) user;
 		} else if (user instanceof GroupEntity) {
 			GroupEntity groupUser = (GroupEntity) user;	
 			update.set("admins", groupUser.getAdmins());
 			update.set("moderators", groupUser.getModerators());
 			update.set("members", groupUser.getMembers());
 			result = mongoTemplate.updateFirst(query, update, GroupEntity.class);
+			if(result == null) {
+				return null;
+			}
+			return (GroupEntity) user;
 		}
 		
-        if(result == null) {
-        	return null;
-        }
-        
-		return user;
+		return null;
 	}
 }

@@ -32,6 +32,12 @@ public class UserEntity implements User {
 	
 	Collection<String> likes;
 	
+	Collection<String> admins;
+	
+	Collection<String> moderators;
+	
+	Collection<String> members;
+	
 	byte[] content;
 	
 	@Override
@@ -84,7 +90,6 @@ public class UserEntity implements User {
 		if(!likes.contains(user.getId())) {
 			likes.add(user.getId());
 		}
-		
 	}
 	
 	@Override
