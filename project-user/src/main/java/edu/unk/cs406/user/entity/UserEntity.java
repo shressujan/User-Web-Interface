@@ -30,7 +30,7 @@ public class UserEntity implements User {
 	@LastModifiedDate
 	Date lastModifiedDate;
 	
-	Collection<ProfileEntity> likes;
+	Collection<String> likes;
 	
 	byte[] content;
 	
@@ -70,22 +70,27 @@ public class UserEntity implements User {
 	}
 
 	@Override
-	public int getLikes() {
+	public int getLikeCount() {
 		return this.likes.size();
+	}
+	
+	@Override
+	public Collection<String> getLikes() {
+		return likes;
 	}
 
 	@Override
 	public void addLike(ProfileEntity user) {
-		if(!likes.contains(user)) {
-			likes.add(user);
+		if(!likes.contains(user.getId())) {
+			likes.add(user.getId());
 		}
 		
 	}
 	
 	@Override
 	public void deleteLike(ProfileEntity user) {
-		if(likes.contains(user)) {
-			likes.remove(user);
+		if(likes.contains(user.getId())) {
+			likes.remove(user.getId());
 		}
 	}
 	

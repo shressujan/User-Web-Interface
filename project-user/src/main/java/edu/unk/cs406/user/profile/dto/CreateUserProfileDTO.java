@@ -1,7 +1,6 @@
 package edu.unk.cs406.user.profile.dto;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;

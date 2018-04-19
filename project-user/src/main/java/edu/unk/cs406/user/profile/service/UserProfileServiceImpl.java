@@ -80,7 +80,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 	@Override
 	public User UpdateUserProfile(UpdateUserProfileDTO dto) {
 		// TODO Auto-generated method stub
-		this.UDTO =Objects.requireNonNull(dto);
+		UDTO = Objects.requireNonNull(dto);
 		Set<ConstraintViolation<UpdateUserProfileDTO>> violations = this.validation.validate(dto, null);
 		if(violations.isEmpty())
 		{

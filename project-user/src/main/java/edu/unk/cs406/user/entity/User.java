@@ -13,7 +13,8 @@ public interface User {
 	public void setDescription(String str);
 	public Date getCreatedDate();
 	public Date getLastModifiedDate();
-	public int getLikes();
+	public int getLikeCount();
+	public Collection<String> getLikes();
 	public void addLike(ProfileEntity user);
 	public void deleteLike(ProfileEntity user);
 	public Collection<String> getComments();
