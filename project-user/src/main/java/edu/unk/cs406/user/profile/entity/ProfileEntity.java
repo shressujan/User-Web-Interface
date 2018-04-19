@@ -8,9 +8,10 @@ import edu.unk.cs406.user.entity.UserEntity;
 public class ProfileEntity extends UserEntity{
 	
 	private Collection<String> subscriptions =  new ArrayList<String>();
-	
+
 	public Collection<String> getSubscriptions() {
-		return subscriptions;
+		return this.subscriptions;
+
 	}
 	
 	public void addSubscriptions(String sub) {

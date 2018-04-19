@@ -15,14 +15,14 @@ import edu.unk.cs406.user.entity.User;
 import edu.unk.cs406.user.group.dto.CreateGroupDTO;
 import edu.unk.cs406.user.group.dto.UpdateGroupDTO;
 import edu.unk.cs406.user.group.entity.GroupEntity;
-import edu.unk.cs406.user.repository.UserRepository;
+import edu.unk.cs406.user.group.repository.GroupRepository;
 
 public class GroupServiceImpl implements GroupService {
 	private static final Logger logger = LoggerFactory.getLogger(GroupServiceImpl.class);
-	private final UserRepository repository;
+	private final GroupRepository repository;
 	private final Validator validator;
 	
-	public GroupServiceImpl(UserRepository repository, Validator validator) {
+	public GroupServiceImpl(GroupRepository repository, Validator validator) {
 		this.repository = Objects.requireNonNull(repository);
 		this.validator = Objects.requireNonNull(validator);
 	}

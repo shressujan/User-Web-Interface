@@ -40,6 +40,15 @@ public class ValidationPatternsUnitTest {
 		Assert.assertFalse("No Symbols", "aeou123AOEUA".matches(ValidationPatterns.SYMBOL_PATTERN));
 		Assert.assertTrue("Symbols", "!@$!@$!@$!@!%%#$(_&^".matches(ValidationPatterns.SYMBOL_PATTERN));
 	}
+	/**
+	 * Test for lowercase, Uppercase, Numbers, symbols and minimum size 8 characters
+	 */
+	@Test
+	public void testGoodPassword()
+	{
+		Assert.assertTrue("Good Password", "TEAcher123!@#".matches(ValidationPatterns.PASSWORD_PATTERN));
+		Assert.assertFalse("Bad Password", "teacher123!".matches(ValidationPatterns.PASSWORD_PATTERN));
+	}
 	
 	/**
 	 * Test email pattern validation.

@@ -1,4 +1,4 @@
-package edu.unk.cs406.user.repository;
+package edu.unk.cs406.user.profile.repository;
 
 import java.time.LocalDateTime;
 
@@ -14,7 +14,7 @@ import edu.unk.cs406.user.entity.UserEntity;
 import edu.unk.cs406.user.group.entity.GroupEntity;
 import edu.unk.cs406.user.profile.entity.ProfileEntity;
 
-public class UserRepositoryImpl implements UserRepositoryCustom {
+public class ProfileRepositoryImpl implements ProfileRepositoryCustom {
 
 	@Autowired
 	MongoTemplate mongoTemplate;

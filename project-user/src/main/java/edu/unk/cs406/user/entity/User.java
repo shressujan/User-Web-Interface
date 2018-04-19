@@ -23,6 +23,7 @@ public interface User {
 	public Collection<String> getLocations();
 	public void addLocation();
 	public void deleteLocation(String locationId);
+	public void addEvent(String event);
 	public Collection<String> getEvents();
 	public byte[] getContent();
 	public void setContent(byte[] content);

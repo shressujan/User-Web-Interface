@@ -13,6 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import edu.unk.cs406.user.profile.entity.ProfileEntity;
 
 @Document(collection= "users")
+
 public class UserEntity implements User {
 
 	@Id
@@ -32,11 +33,12 @@ public class UserEntity implements User {
 	
 	Collection<String> likes;
 	
-	Collection<String> admins;
+	Collection<String> comments;
 	
-	Collection<String> moderators;
+	Collection<String> locations;
 	
-	Collection<String> members;
+	Collection<String> events;
+	
 	
 	byte[] content;
 	
@@ -102,7 +104,7 @@ public class UserEntity implements User {
 	@Override
 	public Collection<String> getComments() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.comments;
 	}
 
 	@Override
@@ -120,7 +122,7 @@ public class UserEntity implements User {
 	@Override
 	public Collection<String> getLocations() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.locations;
 	}
 
 	@Override
@@ -134,11 +136,20 @@ public class UserEntity implements User {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	@Override
+	public void addEvent(String event) {
+		// TODO Auto-generated method stub
+		if(!this.events.contains(event))
+		{
+			this.events.add(event);
+		}
+	}
+	
 	@Override
 	public Collection<String> getEvents() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.events;
 	}
 
 	@Override
@@ -150,5 +161,7 @@ public class UserEntity implements User {
 	public void setContent(byte[] content) {
 		this.content = content;
 	}
+
+	
 
 }

@@ -9,22 +9,24 @@ import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import ch.qos.logback.classic.Logger;
 import edu.unk.cs406.user.profile.dto.CreateUserProfileDTO;
 import edu.unk.cs406.user.profile.dto.UpdateUserProfileDTO;
 import edu.unk.cs406.user.entity.User;
 import edu.unk.cs406.user.entity.UserEntity;
 import edu.unk.cs406.user.profile.entity.ProfileEntity;
-import edu.unk.cs406.user.repository.UserRepository;
+import edu.unk.cs406.user.profile.repository.ProfileRepository;
 
 public class UserProfileServiceImpl implements UserProfileService {
 
 	@Autowired
-	private final UserRepository userRepo;
+	private final ProfileRepository userRepo;
 	private CreateUserProfileDTO CDTO;
 	private UpdateUserProfileDTO UDTO;
 	private final Validator validation;
+//	private static final Logger logger ;
 	
-	public UserProfileServiceImpl (UserRepository u, Validator v)
+	public UserProfileServiceImpl (ProfileRepository u, Validator v)
 	{
 		this.userRepo =  Objects.requireNonNull(u);
 		this.validation = Objects.requireNonNull(v);

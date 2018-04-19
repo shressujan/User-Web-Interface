@@ -17,5 +17,5 @@ public interface UserProfileService {
 	public User FindUserProfileByLabel(String label);
 	public List<UserEntity> FindAllUserProfiles();
 	public User UpdateUserProfile(UpdateUserProfileDTO dto);
-	public User DeleteUserProfile(String profileID);
+	public User DeleteUserProfile(String profileID);  
 }
