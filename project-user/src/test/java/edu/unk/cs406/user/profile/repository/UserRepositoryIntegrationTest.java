@@ -26,8 +26,6 @@ public class UserRepositoryIntegrationTest {
 	@Autowired
 	ProfileRepository profileRepo;
 
-	private GroupEntity gE = null;
-
 	private ProfileEntity pE = null;
 
 	//	@Before
@@ -68,63 +66,56 @@ public class UserRepositoryIntegrationTest {
 	{
 		pE =  new ProfileEntity();
 		pE.setLabel("test1");
+		pE.setEmailID("snoop@yahoo.com");
+		pE.setPassword("PAssword123$%");
 		pE.setDescription("test1");
 		pE.addSubscriptions("test1");
 		this.profileRepo.save(pE);
-		UserEntity uE= this.profileRepo.findOne(pE.getId()) ;
+		ProfileEntity uE= this.profileRepo.findOne(pE.getId()) ;
 		Assert.assertNotNull(uE);
 	}
 
 	@Test
 	public void testfindByLabel()
 	{
-		UserEntity uE=  new UserEntity();
-		uE.setLabel("test5");
-		uE.setDescription("test5");
-		this.profileRepo.save(uE);
+		ProfileEntity pE=  new ProfileEntity();
+		pE.setLabel("test2");
+		pE.setEmailID("snoop@yahoo.com");
+		pE.setPassword("PAssword123$%");
+		pE.setDescription("test2");
+		pE.addSubscriptions("test2");
+		this.profileRepo.save(pE);
 
-		UserEntity u1 = Objects.requireNonNull(this.profileRepo.findByLabel("test5"));
+		ProfileEntity u1 = Objects.requireNonNull(this.profileRepo.findByLabel("test2"));
 		Assert.assertNotNull(u1);
 
 	}
 
 	@Test
-	public void testCustomUpdateUserEntityProfile()
+	public void testCustomUpdateProfileEntity()
 	{
 		//Updating profileEntity in the user repository
-		UserEntity pE=  new ProfileEntity();
+		ProfileEntity pE=  new ProfileEntity();
 		pE.setLabel("test3");
+		pE.setEmailID("snoop@yahoo.com");
+		pE.setPassword("PAssword123$%");
 		pE.setDescription("test3");
+		pE.addSubscriptions("test3");
 		this.profileRepo.save(pE);
 
-		UserEntity uPE = this.profileRepo.findOne(pE.getId());
+		ProfileEntity uPE = this.profileRepo.findOne(pE.getId());
 		uPE.setLabel("test4");
-		uPE.setDescription("test 4");	
-		Assert.assertNotNull(this.profileRepo.updateUserEntity(uPE));		
+		uPE.setEmailID("snoop_suzan@yahoo.com");
+		uPE.setPassword("PAssword123$%");
+		uPE.setDescription("test 4");
+		
+		Assert.assertNotNull(this.profileRepo.updateProfileEntity(uPE));		
 		Assert.assertEquals(pE.getId(), uPE.getId());
 
-		UserEntity updatedPE = this.profileRepo.findOne(uPE.getId());
+		ProfileEntity updatedPE = this.profileRepo.findOne(uPE.getId());
 		Assert.assertEquals(uPE.getLabel(), updatedPE.getLabel());
+		Assert.assertEquals(uPE.getEmailID(), updatedPE.getEmailID());
 
 	}
 	
-//	@Test
-//	public void testCustomUpdateUserEntityGroup()
-//	{
-//
-//		//Updating GroupEntity in the user repository
-//		UserEntity gE=  new GroupEntity();
-//		gE.setLabel("test6");
-//		gE.setDescription("test6");
-//		this.userRepo.save(gE);
-//
-//		UserEntity uGE = this.userRepo.findOne(gE.getId());
-//		uGE.setLabel("test7");
-//		uGE.setDescription("test 7");	
-//		Assert.assertNotNull(this.userRepo.updateUserEntity(uGE));		
-//		Assert.assertEquals(gE.getId(), uGE.getId());
-//		
-//		UserEntity updatedGE = this.userRepo.findOne(uGE.getId());
-//		Assert.assertEquals(uGE.getLabel(), updatedGE.getLabel());
-//	}
 }

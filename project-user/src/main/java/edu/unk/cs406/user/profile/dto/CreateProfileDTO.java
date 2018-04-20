@@ -1,31 +1,45 @@
 package edu.unk.cs406.user.profile.dto;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import edu.unk.cs406.user.profile.entity.ProfileEntity;
+import edu.unk.cs406.user.validation.ValidationPatterns;
 
-public class UpdateUserProfileDTO {
-
-	@org.springframework.data.annotation.Id
+public class CreateProfileDTO {
+	@Id
 	@NotNull
 	private String id;
-	
-	@org.springframework.data.annotation.Id
+
 	@NotNull
 	private String label;
+	
+	@NotNull
+	@Pattern(regexp = ValidationPatterns.EMAIL_PATTERN)
+	private String email;
+	
+	@NotNull
+	@Pattern(regexp = ValidationPatterns.PASSWORD_PATTERN)
+	@Min(8)
+	private String password;
 
 	private String description;
 
+	
 	private List<ProfileEntity> userProfileEntities =  new ArrayList<ProfileEntity>();
 
 	private List<String> userids =  new ArrayList<String>();
 
 	private List<String> subscriptions =  new ArrayList<String>();
-
 
 
 	public String getId() {
@@ -45,6 +59,25 @@ public class UpdateUserProfileDTO {
 		this.label = str;
 	}
 
+	public void setEmailID(String emailid)
+	{
+		this.email = emailid;
+	}
+	
+	public String getEmailID()
+	{
+		return this.email;
+	}
+	
+	public void setPassword(String password)
+	{
+		this.password = password;
+	}
+	
+	public String getPassword()
+	{
+		return this.password;
+	}
 
 	public String getDescription() {
 		// TODO Auto-generated method stub
@@ -73,41 +106,41 @@ public class UpdateUserProfileDTO {
 		this.userProfileEntities.add(profile);
 	}
 
-	//
-	//	public List<Comment> getComments() {
-	//		// TODO Auto-generated method stub
-	//		return null;
-	//	}
-	//
-	//
-	//	public void addComment(Comment comment) {
-	//		// TODO Auto-generated method stub
-	//		
-	//	}
-	//
-	//
-	//	public List<Location> getLocations() {
-	//		// TODO Auto-generated method stub
-	//		return null;
-	//	}
-	//
-	//
-	//	public void addLocation(Location location) {
-	//		// TODO Auto-generated method stub
-	//		
-	//	}
-	//
-	//
-	//	public List<Event> getEvents() {
-	//		// TODO Auto-generated method stub
-	//		return null;
-	//	}
-	//
-	//
-	//	public void addEvent(Event event) {
-	//		// TODO Auto-generated method stub
-	//		
-	//	}
+	
+		public List<String> getComments() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+	
+	
+		public void addComment(String comment) {
+			// TODO Auto-generated method stub
+			
+		}
+	
+	
+		public List<String> getLocations() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+	
+	
+		public void addLocation(String location) {
+			// TODO Auto-generated method stub
+			
+		}
+	
+	
+		public List<String> getEvents() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+	
+	
+		public void addEvent(String event) {
+			// TODO Auto-generated method stub
+			
+		}
 
 
 	public List<String> getSubscriptions() {
@@ -132,6 +165,5 @@ public class UpdateUserProfileDTO {
 		// TODO Auto-generated method stub
 
 	}
-
 
 }

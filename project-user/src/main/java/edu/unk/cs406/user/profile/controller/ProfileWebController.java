@@ -15,16 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import edu.unk.cs406.user.entity.User;
 import edu.unk.cs406.user.entity.UserEntity;
-import edu.unk.cs406.user.profile.dto.CreateUserProfileDTO;
-import edu.unk.cs406.user.profile.service.UserProfileService;
+import edu.unk.cs406.user.profile.dto.CreateProfileDTO;
+import edu.unk.cs406.user.profile.entity.ProfileEntity;
+import edu.unk.cs406.user.profile.service.ProfileService;
 
 @Controller
 @RequestMapping("/user/profile")
 public class ProfileWebController {
 	
-	private UserProfileService ups;
+	private ProfileService ups;
 	
-	public ProfileWebController(UserProfileService ups)
+	public ProfileWebController(ProfileService ups)
 	{
 		this.ups = Objects.requireNonNull(ups);
 	}
@@ -37,7 +38,7 @@ public class ProfileWebController {
 	}
 	
 	@PostMapping("/create")
-	public String CreateProfile(@ModelAttribute CreateUserProfileDTO dto)
+	public String CreateProfile(@ModelAttribute CreateProfileDTO dto)
 	{
 		this.ups.CreateUserProfile(dto);
 		return null;
@@ -53,7 +54,7 @@ public class ProfileWebController {
 	@GetMapping("/get")
 	public String getProfiles(Model modle)
 	{
-		List<UserEntity> ues = this.ups.FindAllUserProfiles();
+		List<ProfileEntity> lpe = this.ups.FindAllUserProfiles();
 		//Do something here  with the model
 		
 		return null;
