@@ -11,6 +11,7 @@ import javax.validation.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 
 import edu.unk.cs406.user.profile.dto.CreateProfileDTO;
 import edu.unk.cs406.user.profile.dto.UpdateProfileDTO;
@@ -37,16 +38,23 @@ public class ProfileServiceImpl implements ProfileService {
 		// TODO Auto-generated method stub
 
 		this.CDTO = Objects.requireNonNull(dto);
-		Set<ConstraintViolation<CreateProfileDTO>> violations = this.validation.validate(dto, null);
+		Set<ConstraintViolation<CreateProfileDTO>> violations = this.validation.validate(dto);
 		if(violations.isEmpty())
 		{
+			if(this.userRepo.exists(dto.getId()))
+			{
+				logger.warn("Id {} already exists", dto.getId());
+				return null;
+			}
 			ProfileEntity UPE = new ProfileEntity();
+			UPE.setId(CDTO.getId());
 			UPE.setLabel(this.CDTO.getLabel());
 			UPE.setDescription(this.CDTO.getDescription());
-			UPE.setEmailID(this.CDTO.getEmailID());
+			UPE.setEmailID(this.CDTO.getEmailID()); 
 			UPE.setPassword(this.CDTO.getPassword());
 			//			UPE.addSubscriptions(this.DTO.getSubscriptions());
 			//			UPE.addContent(this.DTO.getContent());
+			logger.info("ProfileEntity with ID {} created", UPE.getId());
 			return this.userRepo.save(UPE);
 
 		}
@@ -102,19 +110,20 @@ public class ProfileServiceImpl implements ProfileService {
 	@Override
 	public ProfileEntity UpdateUserProfile(UpdateProfileDTO dto) {
 		// TODO Auto-generated method stub
-		UDTO = Objects.requireNonNull(dto);
-		Set<ConstraintViolation<UpdateProfileDTO>> violations = this.validation.validate(dto, null);
+		UDTO = Objects.requireNonNull(dto,"argument zero must not be null");
+		
+		Set<ConstraintViolation<UpdateProfileDTO>> violations = this.validation.validate(dto);
 
 		if(violations.size() > 0)
 		{
-			ConstraintViolationException e = new ConstraintViolationException ("dto is valid", violations);
+			ConstraintViolationException e = new ConstraintViolationException ("dto is invalid", violations);
 			logger.error("Failed to validate {}", dto.getClass().getName(),e);
 			throw e;
 
 		}
 		else
 		{
-			ProfileEntity UPE = null;
+			ProfileEntity UPE = new ProfileEntity();
 			try
 			{
 				UPE = this.userRepo.findOne(this.UDTO.getId());
@@ -122,8 +131,9 @@ public class ProfileServiceImpl implements ProfileService {
 				UPE.setDescription(this.UDTO.getDescription());
 				UPE.setEmailID(this.UDTO.getEmailID());
 				UPE.setPassword(this.UDTO.getPassword());
+				UPE = this.userRepo.updateProfileEntity(UPE);
 				logger.info("ProfileEntity {} with id {} updated", ProfileEntity.class.getName(), UPE.getId() );
-				return this.userRepo.updateProfileEntity(UPE);
+				return UPE;
 			}
 			catch (Exception e)
 			{

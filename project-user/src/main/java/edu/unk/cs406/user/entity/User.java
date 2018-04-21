@@ -7,6 +7,7 @@ import edu.unk.cs406.user.profile.entity.ProfileEntity;
 
 public interface User {
 	public String getId();
+	public void setId(String id);
 	public String getLabel();
 	public void setLabel(String str);
 	public String getDescription();

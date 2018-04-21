@@ -37,6 +37,7 @@ public class GetUnitTest {
 		ProfileEntity upe = this.service.GetUserProfile(id);		
 		Mockito.verify(this.repo).findOne(id);
 		Assert.assertEquals(upe, pe);
+		Assert.assertNotNull(upe);
 	}
 	
 	@Test

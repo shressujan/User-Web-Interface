@@ -48,6 +48,10 @@ public class UserEntity implements User {
 	}
 
 	@Override
+	public void setId(String id) {
+		this.id =  id;
+	}
+	@Override
 	public String getLabel() {
 		return label;
 	}

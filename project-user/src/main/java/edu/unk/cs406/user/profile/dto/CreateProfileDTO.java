@@ -47,6 +47,10 @@ public class CreateProfileDTO {
 		return this.id;
 	}
 
+	public void setId(String id) {
+		// TODO Auto-generated method stub
+		this.id = id;
+	}
 
 	public String getLabel() {
 		// TODO Auto-generated method stub
