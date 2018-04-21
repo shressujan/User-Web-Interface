@@ -63,10 +63,11 @@ public class ProfileServiceImpl implements ProfileService {
 	public ProfileEntity GetUserProfile(String profileID) {
 		// TODO Auto-generated method stub
 		logger.info("Getting id {}", profileID);
-		ProfileEntity UPE = Objects.requireNonNull(this.userRepo.findOne(profileID));
+		ProfileEntity UPE = this.userRepo.findOne(profileID);
+		
 		if(UPE == null)
 		{
-			logger.warn("Unable to get {} id {} not found", UPE.getClass().getName(), profileID );
+			logger.error("Unable to get {} id {} not found",ProfileEntity.class.getName(), profileID );
 			return null;
 		}
 
@@ -77,10 +78,10 @@ public class ProfileServiceImpl implements ProfileService {
 	public ProfileEntity FindUserProfileByLabel(String label) {
 		// TODO Auto-generated method stub
 		logger.info("Getting label {}", label);
-		ProfileEntity UPE =  Objects.requireNonNull(this.userRepo.findByLabel(label));
+		ProfileEntity  UPE =  this.userRepo.findByLabel(label);
 		if(UPE == null)
 		{
-			logger.warn("Unable to get {} label {} not found", UPE.getClass().getName(), label );
+			logger.error("Unable to get {} label {} not found", ProfileEntity.class.getName(), label );
 			return null;
 		}
 
@@ -90,7 +91,12 @@ public class ProfileServiceImpl implements ProfileService {
 	@Override
 	public List<ProfileEntity> FindAllUserProfiles() {
 		// TODO Auto-generated method stub
-		return this.userRepo.findAll();
+		try {
+			return this.userRepo.findAll();
+		} catch (NullPointerException e) {
+			logger.error("Unable to get profiles from {}", this.userRepo.getClass().getName() );
+			return null;
+		}
 	}
 
 	@Override
@@ -116,12 +122,12 @@ public class ProfileServiceImpl implements ProfileService {
 				UPE.setDescription(this.UDTO.getDescription());
 				UPE.setEmailID(this.UDTO.getEmailID());
 				UPE.setPassword(this.UDTO.getPassword());
-				logger.info("ProfileEntity {} with id {} updated", UPE.getClass().getName(), UPE.getId() );
+				logger.info("ProfileEntity {} with id {} updated", ProfileEntity.class.getName(), UPE.getId() );
 				return this.userRepo.updateProfileEntity(UPE);
 			}
 			catch (Exception e)
 			{
-				logger.error("Unable to update ProfileEntity {} with id {} !!", UPE.getClass().getName(), dto.getId() );
+				logger.error("Unable to update ProfileEntity {} with id {} !!", ProfileEntity.class.getName(), dto.getId() );
 			}
 
 			return null;
@@ -131,25 +137,25 @@ public class ProfileServiceImpl implements ProfileService {
 	@Override
 	public ProfileEntity DeleteUserProfile(String profileID) {
 		// TODO Auto-generated method stub
-		ProfileEntity UPE = Objects.requireNonNull(this.userRepo.findOne(profileID));
-		if(UPE != null)
+		ProfileEntity UPE  = this.userRepo.findOne(profileID);
+		if(UPE == null)
 		{
-			try
-			{
-				logger.info("ProfileEntity {} with id {} deleted!", UPE.getClass().getName(), profileID);
-				this.userRepo.delete(UPE.getId());
-				return UPE;
-			}
-			catch (Exception e)
-			{
-				logger.error("Unable to delete ProfileEntity {} with the id {} !!!", UPE.getClass().getName(), profileID);
-				return null;
-			}
+			logger.warn("Unable to delete ProfileEntity {} with the id {} !!!", ProfileEntity.class.getName(), profileID);
+			return null;	
 		}
 		else
 		{
-			logger.error("Unable to delete ProfileEntity {} with the id {} !!!", UPE.getClass().getName(), profileID);
-			return null;
+			try
+			{
+				this.userRepo.delete(UPE.getId());
+				logger.info("ProfileEntity {} with id {} deleted!", ProfileEntity.class.getName(), profileID);
+				return UPE;
+			}
+			catch (IllegalArgumentException e)
+			{
+				logger.error("Unable to delete ProfileEntity {} with the id {} !!!", ProfileEntity.class.getName(), profileID, e);
+				return null;
+			}
 		}
 	}
 
