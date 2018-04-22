@@ -24,7 +24,7 @@ public class ConstructorUnitTest {
 		}
 		catch(Exception e)
 		{
-			Assert.assertTrue(e instanceof NullPointerException);
+			Assert.assertTrue(e instanceof NullPointerException); 
 		}
 		
 		try
