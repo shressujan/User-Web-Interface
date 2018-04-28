@@ -10,13 +10,16 @@ import javax.validation.Validator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import edu.unk.cs406.user.entity.User;
+import edu.unk.cs406.user.entity.UserEntity;
 import edu.unk.cs406.user.group.dto.CreateGroupDTO;
 import edu.unk.cs406.user.group.dto.UpdateGroupDTO;
 import edu.unk.cs406.user.group.entity.GroupEntity;
 import edu.unk.cs406.user.group.repository.GroupRepository;
 
+@Service
 public class GroupServiceImpl implements GroupService {
 	private static final Logger logger = LoggerFactory.getLogger(GroupServiceImpl.class);
 	private final GroupRepository repository;
@@ -37,9 +40,8 @@ public class GroupServiceImpl implements GroupService {
 		}
 		
 		GroupEntity entity = new GroupEntity();
-//		entity.setUsername(dto.getUsername());
-//		entity.setPassword(dto.getPassword());
-//		entity.setEmail(dto.getEmail());
+		
+		//
 		
 		return this.repository.save(entity);
 	}
@@ -69,8 +71,8 @@ public class GroupServiceImpl implements GroupService {
 	}
 
 	public List<GroupEntity> find() {
-		//return this.repository.findAll();
-		return null;
+		
+		return this.repository.findAll();
 	}
 
 	public User update(UpdateGroupDTO dto) {
@@ -91,16 +93,6 @@ public class GroupServiceImpl implements GroupService {
 			logger.error("unable to update {} id {} does not exist", GroupEntity.class.getName(), dto.getId(), e);
 			return null;
 		}
-		
-//		if(dto.getUsername() != null) {
-//			entity.setUsername(dto.getUsername());
-//		}
-//		if(dto.getPassword() != null) {
-//			entity.setPassword(dto.getPassword());
-//		}
-//		if(dto.getEmail() != null) {
-//			entity.setEmail(dto.getEmail());
-//		}
 		
 		//Save Changes
 		entity = this.repository.save(entity);
@@ -126,5 +118,11 @@ public class GroupServiceImpl implements GroupService {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public void deleteAll() {
+		this.repository.deleteAll();
+		
 	}
 }

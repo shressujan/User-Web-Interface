@@ -11,6 +11,9 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import edu.unk.cs406.user.profile.entity.ProfileEntity;
+import edu.unk.csit406.domain.Comment;
+import edu.unk.csit406.domain.Location;
+import edu.unk.scit406.event.entity.Event;
 
 @Document(collection= "users")
 
@@ -38,7 +41,6 @@ public class UserEntity implements User {
 	Collection<String> locations;
 	
 	Collection<String> events;
-	
 	
 	byte[] content;
 	
@@ -92,9 +94,9 @@ public class UserEntity implements User {
 	}
 
 	@Override
-	public void addLike(ProfileEntity user) {
-		if(!likes.contains(user.getId())) {
-			likes.add(user.getId());
+	public void addLike(String user) {
+		if(!likes.contains(user)) {
+			likes.add(user);
 		}
 	}
 	
@@ -112,15 +114,15 @@ public class UserEntity implements User {
 	}
 
 	@Override
-	public void addComment(ProfileEntity user, String comment) {
+	public void addComment(String comment) {
 		// TODO Auto-generated method stub
-		
+		this.comments.add(comment);
 	}
 
 	@Override
-	public void deleteComment(String commentId) {
+	public void deleteComment(String comment) {
 		// TODO Auto-generated method stub
-		
+		this.comments.remove(comment);
 	}
 
 	@Override
@@ -130,14 +132,16 @@ public class UserEntity implements User {
 	}
 
 	@Override
-	public void addLocation() {
+	public void addLocation(String location) {
 		// TODO Auto-generated method stub
+		this.locations.add(location);
 		
 	}
 
 	@Override
-	public void deleteLocation(String locationId) {
+	public void deleteLocation(String location) {
 		// TODO Auto-generated method stub
+		this.locations.remove(location);
 		
 	}
 	

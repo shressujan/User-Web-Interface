@@ -1,7 +1,7 @@
 package edu.unk.cs406.user.group.repository;
 
-import edu.unk.cs406.user.entity.UserEntity;
+import edu.unk.cs406.user.group.entity.GroupEntity;
 
 public interface GroupRepositoryCustom {
-	public UserEntity updateUserEntity(UserEntity user);
+	public GroupEntity updateGroupEntity(GroupEntity group);
 }

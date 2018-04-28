@@ -1,6 +1,7 @@
 package edu.unk.cs406.user.profile.dto;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,9 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import edu.unk.cs406.user.profile.entity.ProfileEntity;
 import edu.unk.cs406.user.validation.ValidationPatterns;
+import edu.unk.csit406.domain.Comment;
+import edu.unk.csit406.domain.Location;
+import edu.unk.scit406.event.entity.Event;
 
 public class UpdateProfileDTO {
 	@Id
@@ -34,6 +38,12 @@ public class UpdateProfileDTO {
 
 	private String description;
 
+	private Collection<Comment> comments;
+	
+	private Collection<Location> locations;
+	
+	private Collection<Event> events; 
+	
 	private List<ProfileEntity> userProfileEntities =  new ArrayList<ProfileEntity>();
 
 	private List<String> userids =  new ArrayList<String>();
@@ -88,7 +98,7 @@ public class UpdateProfileDTO {
 	}
 
 
-	public void addDescription(String str) {
+	public void setDescription(String str) {
 		// TODO Auto-generated method stub
 		this.description = str;
 	}
@@ -104,45 +114,45 @@ public class UpdateProfileDTO {
 	}
 
 
-	public void addLike(ProfileEntity profile) {
+	public void setLike(ProfileEntity profile) {
 		// TODO Auto-generated method stub
 		this.userProfileEntities.add(profile);
 	}
 
 	
-		public List<String> getComments() {
+		public Collection<Comment> getComments() {
 			// TODO Auto-generated method stub
-			return null;
+			return this.comments;
 		}
 	
 	
-		public void addComment(String comment) {
+		public void setComment(Comment comment) {
 			// TODO Auto-generated method stub
-			
+			this.comments.add(comment);
 		}
 	
 	
-		public List<String> getLocations() {
+		public Collection<Location> getLocations() {
 			// TODO Auto-generated method stub
-			return null;
+			return this.locations;
 		}
 	
 	
-		public void addLocation(String location) {
+		public void setLocation(Location location) {
 			// TODO Auto-generated method stub
-			
+			this.locations.add(location);
 		}
 	
 	
-		public List<String> getEvents() {
+		public Collection<Event> getEvents() {
 			// TODO Auto-generated method stub
-			return null;
+			return this.events;
 		}
 	
 	
-		public void addEvent(String event) {
+		public void setEvent(Event event) {
 			// TODO Auto-generated method stub
-			
+			this.events.add(event);
 		}
 
 
@@ -152,7 +162,7 @@ public class UpdateProfileDTO {
 	}
 
 
-	public void addSubscriptions(String sub) {
+	public void setSubscriptions(String sub) {
 		// TODO Auto-generated method stub
 		this.subscriptions.add(sub);
 	}
@@ -164,8 +174,9 @@ public class UpdateProfileDTO {
 	}
 
 
-	public void addContent() {
+	public void setContent() {
 		// TODO Auto-generated method stub
 
 	}
+
 }

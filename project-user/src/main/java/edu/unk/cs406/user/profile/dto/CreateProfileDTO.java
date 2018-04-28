@@ -1,6 +1,7 @@
 package edu.unk.cs406.user.profile.dto;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -11,9 +12,13 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import edu.unk.cs406.user.profile.entity.ProfileEntity;
 import edu.unk.cs406.user.validation.ValidationPatterns;
+import edu.unk.csit406.domain.Comment;
+import edu.unk.csit406.domain.Location;
+import edu.unk.scit406.event.entity.Event;
 
 public class CreateProfileDTO {
 	@Id
@@ -29,11 +34,16 @@ public class CreateProfileDTO {
 	
 	@NotNull
 	@Pattern(regexp = ValidationPatterns.PASSWORD_PATTERN)
-	@Min(8)
+	@Size( min=8)
 	private String password;
 
 	private String description;
 
+	private Collection<Comment> comments;
+	
+	private Collection<Location> locations;
+	
+	private Collection<Event> events; 
 	
 	private List<ProfileEntity> userProfileEntities =  new ArrayList<ProfileEntity>();
 
@@ -111,39 +121,39 @@ public class CreateProfileDTO {
 	}
 
 	
-		public List<String> getComments() {
+		public Collection<Comment> getComments() {
 			// TODO Auto-generated method stub
-			return null;
+			return this.comments;
 		}
 	
 	
-		public void addComment(String comment) {
+		public void addComment(Comment comment) {
 			// TODO Auto-generated method stub
-			
+			this.comments.add(comment);
 		}
 	
 	
-		public List<String> getLocations() {
+		public Collection<Location> getLocations() {
 			// TODO Auto-generated method stub
-			return null;
+			return this.locations;
 		}
 	
 	
-		public void addLocation(String location) {
+		public void addLocation(Location location) {
 			// TODO Auto-generated method stub
-			
+			this.locations.add(location);
 		}
 	
 	
-		public List<String> getEvents() {
+		public Collection<Event> getEvents() {
 			// TODO Auto-generated method stub
-			return null;
+			return this.events;
 		}
 	
 	
-		public void addEvent(String event) {
+		public void addEvent(Event event) {
 			// TODO Auto-generated method stub
-			
+			this.events.add(event);
 		}
 
 

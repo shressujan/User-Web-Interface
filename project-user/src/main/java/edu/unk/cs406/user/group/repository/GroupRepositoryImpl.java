@@ -10,16 +10,14 @@ import org.springframework.data.mongodb.core.query.Update;
 
 import com.mongodb.WriteResult;
 
-import edu.unk.cs406.user.entity.UserEntity;
 import edu.unk.cs406.user.group.entity.GroupEntity;
-import edu.unk.cs406.user.profile.entity.ProfileEntity;
 
 public class GroupRepositoryImpl implements GroupRepositoryCustom {
 
 	@Autowired
 	MongoTemplate mongoTemplate;
 	
-	public UserEntity updateUserEntity(UserEntity user) {
+	public GroupEntity updateGroupEntity(GroupEntity user) {
 		Query query =  new Query(Criteria.where("id").is(user.getId()));
 		Update update =  new Update();
 		update.set("label", user.getLabel());
@@ -32,15 +30,7 @@ public class GroupRepositoryImpl implements GroupRepositoryCustom {
 		update.set("content", user.getContent());
 		WriteResult result = null;
 		
-		if(user instanceof ProfileEntity) {
-			ProfileEntity profileUser = (ProfileEntity) user;
-			update.set("subscriptions", profileUser.getSubscriptions());
-			result = mongoTemplate.updateFirst(query, update, ProfileEntity.class);
-			if(result == null) {
-				return null;
-			}
-			return (ProfileEntity) user;
-		} else if (user instanceof GroupEntity) {
+		if (user instanceof GroupEntity) {
 			GroupEntity groupUser = (GroupEntity) user;	
 			update.set("admins", groupUser.getAdmins());
 			update.set("moderators", groupUser.getModerators());

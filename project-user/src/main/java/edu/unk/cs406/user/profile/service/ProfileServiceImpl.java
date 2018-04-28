@@ -3,6 +3,7 @@ package edu.unk.cs406.user.profile.service;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
@@ -11,6 +12,7 @@ import javax.validation.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import edu.unk.cs406.user.profile.dto.CreateProfileDTO;
@@ -18,6 +20,7 @@ import edu.unk.cs406.user.profile.dto.UpdateProfileDTO;
 import edu.unk.cs406.user.profile.entity.ProfileEntity;
 import edu.unk.cs406.user.profile.repository.ProfileRepository;
 
+@Service
 public class ProfileServiceImpl implements ProfileService {
 
 	@Autowired
@@ -38,7 +41,10 @@ public class ProfileServiceImpl implements ProfileService {
 		// TODO Auto-generated method stub
 
 		this.CDTO = Objects.requireNonNull(dto);
-		Set<ConstraintViolation<CreateProfileDTO>> violations = this.validation.validate(dto);
+		System.err.println(CDTO.getPassword());
+		System.err.println(CDTO.getLabel());
+		System.err.println(CDTO.getEmailID());
+		Set<ConstraintViolation<CreateProfileDTO>> violations = this.validation.validate(CDTO);
 		if(violations.isEmpty())
 		{
 			if(this.userRepo.exists(dto.getId()))
@@ -60,6 +66,7 @@ public class ProfileServiceImpl implements ProfileService {
 		}
 		else
 		{
+			System.err.println(violations.toString());
 			logger.error("Constraint Violation {}", dto.getClass().getName());
 			throw new ConstraintViolationException(violations);
 
@@ -167,6 +174,13 @@ public class ProfileServiceImpl implements ProfileService {
 				return null;
 			}
 		}
+	}
+
+
+	@Override
+	public void deleteAll() {
+		this.userRepo.deleteAll();
+		
 	}
 
 }

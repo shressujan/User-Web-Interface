@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.stereotype.Repository;
 
 import com.mongodb.WriteResult;
 
@@ -14,6 +15,7 @@ import edu.unk.cs406.user.entity.UserEntity;
 import edu.unk.cs406.user.group.entity.GroupEntity;
 import edu.unk.cs406.user.profile.entity.ProfileEntity;
 
+@Repository
 public class ProfileRepositoryImpl implements ProfileRepositoryCustom {
 
 	@Autowired
