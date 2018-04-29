@@ -85,7 +85,7 @@ public class UserWebController {
 		m.addAttribute("Locations", strArr);
 		m.addAttribute("Subscriptions", strArr);
 
-		return "user/profile/view";
+		return "user/profile/layout";
 	}
 
 	@GetMapping("/group")

@@ -18,7 +18,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
   <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
   <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Logo</a>
   <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-globe"></i></a>
-  <a href="/user/profile/update/{profile.getID()}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a>
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a>
   <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
   <div class="w3-dropdown-hover w3-hide-small">
     <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>     
@@ -51,29 +51,56 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
       <!-- Profile -->
       <div class="w3-card w3-round w3-white">
         <div class="w3-container">
-         <h4 class="w3-center">My Profile</h4>
+         <h4 class="w3-center">${entity.getLabel()}</h4>
          <p class="w3-center"><img src="/w3images/avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
          <hr>
-         <p> <i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> </a> Designer, UI</p>
+         <p> <i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> </a>${entity.getEmailID()}</p>
          <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
          <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
         </div>
       </div>
       <br>
-      
       <!-- Accordion -->
       <div class="w3-card w3-round">
         <div class="w3-white">
           <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Subscriptions</button>
           <div id="Demo1" class="w3-hide w3-container">
-            <p>Some text..</p>
+            <p><#list Subscriptions as subscription>
+			<ul>
+				<li>${subscription}</li>
+			</ul>
+		<#else>
+				<div class="w3-panel w3-blue">
+				  <p>No Items Found in the List</p>
+				</div> 
+		</#list></p>
           </div>
           <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> My Events</button>
           <div id="Demo2" class="w3-hide w3-container">
-            <p>Some other text..</p>
+            <p><#list Events as event>
+				<ul>
+					<li>${event}</li>
+				</ul>
+			<#else>
+				<div class="w3-panel w3-blue">
+				  <p>No Events</p>
+				</div> 
+			</#list></p>
           </div>
-          <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> My Locations</button>
+          <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> My Locations</button>
           <div id="Demo3" class="w3-hide w3-container">
+            <p><#list Locations as location>
+				<ul>
+					<li>${location}</li>
+				</ul>
+			<#else>
+				<div class="w3-panel w3-blue">
+				  <p>No Locations</p>
+				</div> 
+			</#list></p>
+          </div>
+          <button onclick="myFunction('Demo4')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> My Photos</button>
+          <div id="Demo4" class="w3-hide w3-container">
          <div class="w3-row-padding">
          <br>
            <div class="w3-half">
@@ -163,7 +190,18 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
           </div>
         </div>
         <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
-        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
+        <button onclick="myFunction('DemoComment1')" type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i> Comment</button>
+          <div id="DemoComment1" class="w3-hide w3-container">
+        <#list Comments as comment>
+				<ul>
+					<li>${comment}</li>
+				</ul>
+			<#else>
+				<div class="w3-panel w3-blue">
+				  <p>No Comments</p>
+				</div> 
+			</#list>
+			</div>
       </div>
       
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
@@ -173,7 +211,18 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         <hr class="w3-clear">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
-        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
+        <button onclick="myFunction('DemoComment2')" type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i> Comment</button>
+          <div id="DemoComment2" class="w3-hide w3-container">
+        <#list Comments as comment>
+				<ul>
+					<li>${comment}</li>
+				</ul>
+			<#else>
+				<div class="w3-panel w3-blue">
+				  <p>No Comments</p>
+				</div> 
+			</#list>
+			</div>
       </div>  
 
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
