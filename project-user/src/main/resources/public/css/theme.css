@@ -1,0 +1,62 @@
+/* Global Styles */
+html, body, main, .theme-full-height {height:100%;}
+header h1 {
+    font-family:inherit;
+    margin:0;
+}
+main {
+    padding-top:46px;
+}
+
+/* W3 Overrides */
+.w3-top{z-index:100;}
+
+/* Branding Global */
+
+
+
+/* Branding Files */
+.node {
+	margin:0 5px;
+}
+.node:hover{cursor:pointer;}
+.node.active {
+	background-color: gray;
+	color: #fff;
+	border-radius:3px;
+	padding:1px 5px;
+}
+
+
+/* Branding Commands */
+.branding-commands {
+	width:110px;
+	background-color: #232323;    
+    padding:0;
+    text-align:center;
+}
+.branding-commands > button,
+.branding-commands > a {
+	background:transparent;
+	color: #E2E2E2;
+	border:none;
+	text-decoration:none;
+}
+
+.branding-commands > button:hover,
+.branding-commands > a:hover{
+	cursor:pointer;
+}
+
+/* Branding Editor */
+.branding-editor {
+	padding-left:0;
+	
+}
+
+#editor {
+    position: relative;
+    width: calc(100% + 32px);
+    height: 100%;
+    margin: 0 -16px;
+}

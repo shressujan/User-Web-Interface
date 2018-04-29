@@ -25,7 +25,6 @@ public class ProfileServiceImpl implements ProfileService {
 
 	@Autowired
 	private final ProfileRepository userRepo;
-	private CreateProfileDTO CDTO;
 	private UpdateProfileDTO UDTO;
 	private final Validator validation;
 	private static final Logger logger = LoggerFactory.getLogger(ProfileServiceImpl.class);
@@ -39,8 +38,8 @@ public class ProfileServiceImpl implements ProfileService {
 
 	public ProfileEntity CreateUserProfile(CreateProfileDTO dto) {
 		// TODO Auto-generated method stub
-
-		this.CDTO = Objects.requireNonNull(dto);
+		CreateProfileDTO CDTO = null;
+		CDTO = Objects.requireNonNull(dto);
 		System.err.println(CDTO.getPassword());
 		System.err.println(CDTO.getLabel());
 		System.err.println(CDTO.getEmailID());
@@ -52,12 +51,16 @@ public class ProfileServiceImpl implements ProfileService {
 				logger.warn("Id {} already exists", dto.getId());
 				return null;
 			}
+			String id = UUID.randomUUID().toString();
+			while(this.userRepo.exists(id)) {
+				id = UUID.randomUUID().toString();
+			}
 			ProfileEntity UPE = new ProfileEntity();
-			UPE.setId(CDTO.getId());
-			UPE.setLabel(this.CDTO.getLabel());
-			UPE.setDescription(this.CDTO.getDescription());
-			UPE.setEmailID(this.CDTO.getEmailID()); 
-			UPE.setPassword(this.CDTO.getPassword());
+			UPE.setId(id);
+			UPE.setLabel(CDTO.getLabel());
+			UPE.setDescription(CDTO.getDescription());
+			UPE.setEmailID(CDTO.getEmailID()); 
+			UPE.setPassword(CDTO.getPassword());
 			//			UPE.addSubscriptions(this.DTO.getSubscriptions());
 			//			UPE.addContent(this.DTO.getContent());
 			logger.info("ProfileEntity with ID {} created", UPE.getId());

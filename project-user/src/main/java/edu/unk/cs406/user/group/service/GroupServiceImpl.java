@@ -3,6 +3,7 @@ package edu.unk.cs406.user.group.service;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
@@ -30,7 +31,7 @@ public class GroupServiceImpl implements GroupService {
 		this.validator = Objects.requireNonNull(validator);
 	}
 	
-	public User create(CreateGroupDTO dto) {
+	public GroupEntity create(CreateGroupDTO dto) {
 		dto = Objects.requireNonNull(dto);
 		
 		Set<ConstraintViolation<CreateGroupDTO>> violations = this.validator.validate(dto);
@@ -38,18 +39,25 @@ public class GroupServiceImpl implements GroupService {
 			logger.error("Constraint Violation {}", dto.getClass().getName());
 			throw new ConstraintViolationException(violations);
 		}
-		
+		String id = UUID.randomUUID().toString();
+		while(this.repository.exists(id)) {
+			id = UUID.randomUUID().toString();
+		}
 		GroupEntity entity = new GroupEntity();
 		
-		//
+		GroupEntity UPE = new GroupEntity();
+		UPE.setId(id);
+		UPE.setLabel(dto.getLabel());
+		UPE.setDescription(dto.getDescription());
+
 		
 		return this.repository.save(entity);
 	}
 
-	public User get(String id) {
+	public GroupEntity get(String id) {
 		logger.info("getting id {}", id);
 		
-		User user = this.repository.findOne(id);
+		GroupEntity user = this.repository.findOne(id);
 		
 		if(user == null) {
 			logger.warn("Unable to get {} id {} not found", GroupEntity.class.getName(), id);

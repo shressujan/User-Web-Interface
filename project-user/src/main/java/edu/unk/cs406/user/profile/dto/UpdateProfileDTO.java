@@ -8,6 +8,7 @@ import java.util.List;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
@@ -33,7 +34,7 @@ public class UpdateProfileDTO {
 	
 	@NotNull
 	@Pattern(regexp = ValidationPatterns.PASSWORD_PATTERN)
-	@Min(8)
+	@Size( min=8)
 	private String password;
 
 	private String description;

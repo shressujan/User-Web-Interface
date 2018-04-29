@@ -4,8 +4,14 @@ import java.util.Collection;
 
 import javax.validation.constraints.NotNull;
 
+import org.springframework.data.annotation.Id;
+
 public class CreateGroupDTO {
 	
+	@Id
+	@NotNull
+	private String id;
+
 	@NotNull
 	String label;
 	
@@ -20,6 +26,16 @@ public class CreateGroupDTO {
 	Collection<String> members;
 	
 	byte[] content;
+	
+	public String getId() {
+		// TODO Auto-generated method stub
+		return this.id;
+	}
+
+	public void setId(String id) {
+		// TODO Auto-generated method stub
+		this.id = id;
+	}
 
 	public String getLabel() {
 		return label;

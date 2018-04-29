@@ -5,9 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import edu.unk.cs406.user.profile.entity.ProfileEntity;
 
-
-@Repository
-
 public interface ProfileRepository extends MongoRepository<ProfileEntity, String>, ProfileRepositoryCustom {
 	public ProfileEntity findByLabel(String label);
 }
