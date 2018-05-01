@@ -74,16 +74,30 @@ public class UserWebController {
 	public String profileView(@PathVariable(value = "id", required = true) String id , Model m)
 	{
 		ProfileEntity ue = this.ups.GetUserProfile(id);
-		List<String> strArr = new ArrayList<String>();
-		strArr.add("Test Data");
+		List<String> Comments = new ArrayList<String>();
+		Comments.add("Nice!");
+		Comments.add("Awesome!");
+		
+		List<String> Events = new ArrayList<String>();
+		Events.add("Party at Sujan's house at 8 friday!");
+		Events.add("Concert - May 12 Saturday- omaha");
+		
+		List<String> Locations = new ArrayList<String>();
+		Locations.add("Colorado");
+		Locations.add("New york");
+		Locations.add("Las Vegas");
+		
+		List<String> Subscriptions = new ArrayList<String>();
+		Subscriptions.add("Emoji");
+		Subscriptions.add("Funny");
 		
 		m.addAttribute("title", "Profile View");
 		m.addAttribute("entity", ue);
 		m.addAttribute("userList", "Subscriptions");
-		m.addAttribute("Comments", strArr);
-		m.addAttribute("Events", strArr);
-		m.addAttribute("Locations", strArr);
-		m.addAttribute("Subscriptions", strArr);
+		m.addAttribute("Comments", Comments);
+		m.addAttribute("Events", Events);
+		m.addAttribute("Locations", Locations);
+		m.addAttribute("Subscriptions", Subscriptions);
 
 		return "user/profile/layout";
 	}
@@ -129,35 +143,36 @@ public class UserWebController {
 //		group2.setLabel("Group 2");
 //		group2.setDescription("Test Description");
 		
+		
 		CreateProfileDTO profile1 = new CreateProfileDTO();
 		profile1.setId(UUID.randomUUID().toString());
-		profile1.setLabel("Profile 1");
+		profile1.setLabel("Sujan");
 		profile1.setPassword("CReate123!@#");
-		profile1.setEmailID("snoop@yahoo.com");
-		profile1.addDescription("test Description");
+		profile1.setEmailID("snoop_suzan@yahoo.com");
+		profile1.addDescription("Hi my Name is Sujan!");
 		
 	
 	
 		CreateProfileDTO profile2 = new CreateProfileDTO();
 		profile2.setId(UUID.randomUUID().toString());
-		profile2.setLabel("Profile 2");
-		profile2.setPassword("CReatS123!@#");
-		profile2.setEmailID("helloop@yahoo.com");
-		profile2.addDescription("test 2 Description");
+		profile2.setLabel("Eduardo Salas");
+		profile2.setPassword("Salase123!@#");
+		profile2.setEmailID("salase2@gmail.com");
+		profile2.addDescription("My name is Eduardo");
 		
 		CreateProfileDTO profile3 = new CreateProfileDTO();
 		profile3.setId(UUID.randomUUID().toString());
-		profile3.setLabel("Profile 3");
-		profile3.setPassword("CReate123!@#");
-		profile3.setEmailID("snoopy@yahoo.com");
-		profile3.addDescription("test 3 Description");
+		profile3.setLabel("Paul Swenson");
+		profile3.setPassword("PAssword12!@#");
+		profile3.setEmailID("swensonpn@unk.edu");
+		profile3.addDescription("I am a Professor");
 	
 		this.ups.CreateUserProfile(profile1);
 		this.ups.CreateUserProfile(profile2);
 		this.ups.CreateUserProfile(profile3);
 //		this.ugs.create(group1);
 //		this.ugs.create(group2);
-		
+//		
 		return "redirect:/user/";
 	}
 	

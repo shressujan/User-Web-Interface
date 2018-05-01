@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import edu.unk.cs406.user.entity.User;
-import edu.unk.cs406.user.entity.UserEntity;
 import edu.unk.cs406.user.group.dto.CreateGroupDTO;
 import edu.unk.cs406.user.group.dto.UpdateGroupDTO;
 import edu.unk.cs406.user.group.entity.GroupEntity;
